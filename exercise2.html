@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise 2 </title>
+  </head>
+  <body>
+    <h1>Exercise 2</h1>
+    <p>Open  console to view  output.</p>
+    <script>
+      
+      (function runChangeMakingExercise() {
+        const manatBanknotes = [200, 100, 50, 20, 10, 5, 1];
+
+        function renderChange(amount) {
+          const banknotesReturned = [];
+          console.log('calculating  change for', amount );
+
+          manatBanknotes.forEach(function (banknote) {
+            const quantity = Math.floor(amount / banknote);
+            banknotesReturned[banknote] = quantity;
+            amount = amount % banknote;
+          });
+
+          manatBanknotes.forEach(function (banknote) {
+            const quantity = banknotesReturned[banknote];
+            if (quantity > 0) {
+              console.log(quantity, 'x', banknote );
+            }
+          });
+
+          console.log('result (index = banknote):', banknotesReturned);
+          return banknotesReturned;
+        }
+
+        renderChange(369);
+      })();
+    </script>
+  </body>
+</html>
+

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise 1</title>
+  </head>
+  <body>
+    <h1>Exercise 1 </h1>
+    <p>Open console to view output.</p>
+    <script>
+      
+      (function runEqualityExercise() {
+        const digits = Array.from({ length: 9 }, function (_, index) {
+          return index + 1;
+        });
+
+        console.log('Exercise 1 — searching for armstrong numbers.');
+
+        digits.forEach(function (A) {
+          digits.forEach(function (B) {
+            digits.forEach(function (C) {
+              const decimalValue = A * 100 + B * 10 + C;
+              const cubesSum = Math.pow(A, 3) + Math.pow(B, 3) + Math.pow(C, 3);
+
+              if (decimalValue === cubesSum) {
+                const formattedDigits = [A, B, C]
+                  .map(function (digit) {
+                    return digit.toString();
+                  })
+                  .join('');
+
+                console.log(
+                  'found:',
+                  formattedDigits,
+                  '=>',
+                  decimalValue,
+                  ' = ',
+                  cubesSum
+                );
+              }
+            });
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>
+

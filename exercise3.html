@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise 3 </title>
+  </head>
+  <body>
+    <h1>Exercise 3 </h1>
+    <p>Open console to view  output.</p>
+    <script>
+      
+
+      (function runLuhnExercise() {
+        var testCardNumbers = [
+          '4556483529563734',
+          '4716589440775905',
+          '4485747130099965',
+          '4485287305655689',
+          '4556637036454105',
+          '5355201015310653',
+          '5118042393495700',
+          '5164667492924672',
+          '5489502250298050',
+          '5597840998694365',
+          '375412915808533',
+          '374230327989555',
+          '345853063509893',
+          '373985296422836',
+          '379540387033242'
+        ];
+
+        function computeLuhnDetails(cardNumber) {
+          var sanitized = String(cardNumber).replace(/\s+/g, '');
+          var payload = sanitized.substring(0, sanitized.length - 1);
+          var providedCheckDigit = parseInt(sanitized.substring(sanitized.length - 1), 10);
+
+          var reversedDigits = payload.split('').reverse();
+          var sum = 0;
+
+          reversedDigits.forEach(function (charDigit, index) {
+            var digit = parseInt(charDigit, 10);
+            if (index % 2 === 0) {
+              digit = digit * 2;
+              digit = digit > 9 ? digit - 9 : digit;
+            }
+            sum += digit;
+          });
+
+          var calculatedCheckDigit = (10 - (sum % 10)) % 10;
+
+          return {
+            number: sanitized,
+            providedCheckDigit: providedCheckDigit,
+            calculatedCheckDigit: calculatedCheckDigit,
+            isValid: providedCheckDigit === calculatedCheckDigit
+          };
+        }
+
+        testCardNumbers.forEach(function (num) {
+          var result = computeLuhnDetails(num);
+          console.log('vard:', result.number);
+          console.log('calculated check digit:', result.calculatedCheckDigit);
+          console.log('provided check digit:', result.providedCheckDigit);
+          console.log('Result:', result.isValid ? 'valid' : 'not valid');
+          console.log('---');
+        });
+      })();
+    </script>
+  </body>
+</html>
+
